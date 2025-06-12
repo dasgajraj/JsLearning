@@ -1,1 +1,1 @@
-Obj
+Math.random()*10
