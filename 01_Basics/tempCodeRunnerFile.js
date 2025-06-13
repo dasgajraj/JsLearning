@@ -1,1 +1,1 @@
-Math.random()*10
+timeSnapsot
