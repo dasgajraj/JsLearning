@@ -1,34 +1,32 @@
-"use strict"
-console.log(3)
-let name = "das";
-let age = 21;
-let isLoggedIn = false;
+"use strict"  // Enforces modern JS practices
 
-console.log(name)
-console.log(age)
-console.log(isLoggedIn)
+console.log(3);
+
+let name = "das";           // string
+let age = 21;               // number
+let isLoggedIn = false;     // boolean
+
+console.log(name);
+console.log(age);
+console.log(isLoggedIn);
+
+// 🧠 typeof checks
+console.table([
+    typeof name, name,
+    typeof age, age,
+    typeof isLoggedIn, isLoggedIn,
+    typeof null, null,               // 👀 null is "object" (quirk in JS)
+    typeof undefined, undefined      // ✅ "undefined"
+]);
 
 /*
-number => 2 ro power 53
-bigint
-string =>""
-boolean => true/false
-null => standalne value (iska mtlab kooi value nahi hai abhi)
-undefined => koi value abhi assigned nahi hui 
-symbol => uniniqe component hai 
-
-//object 
-
+📌 JavaScript Data Types:
+- number      => 2^53 range
+- bigint      => for very large integers
+- string      => text
+- boolean     => true / false
+- null        => intentional absence of value (standalone value)
+- undefined   => variable declared but not assigned
+- symbol      => unique identifier
+- object      => collections
 */
-
-console.table([typeof name,
-    name,
-typeof age,
-    age,
-typeof isLoggedIn,
-    isLoggedIn,
-typeof null,
-    null,
-typeof undefined,
-    undefined
-])

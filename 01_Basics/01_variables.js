@@ -1,31 +1,31 @@
 // 1 to 4 video
-const accountId = 1234567890;
-let accuontEmail = "das.study.das@gmail.com";
-var accountPassword = "132003";
-accuontCity = "Delhi";
-let accountState;
+const accountId = 1234567890;  // ✅ constant - cannot be reassigned
+let accuontEmail = "das.study.das@gmail.com";  // 🔄 mutable, block scoped
+var accountPassword = "132003";  // ⚠️ avoid using var (function scoped)
+accuontCity = "Delhi";  // ❗implicit global variable (not recommended)
+let accountState;  // ➖ declared but undefined
 
-// accountId=41127656533; //not allowed
+// accountId = 41127656533; ❌ Not allowed (const)
 
 accuontEmail = "dasgajraj1@gmail.com";
 accountPassword = "1234";
-accuontCity="Faridabad";
+accuontCity = "Faridabad";  // updated
+// accountState remains undefined
 
-console.log(accountId);
-console.log(accuontEmail);
-console.log(accountPassword);
-console.log(accuontCity);
-console.log(accountState);
+// 🔍 Individual logs
+console.log("Account ID:", accountId);
+console.log("Email:", accuontEmail);
+console.log("Password:", accountPassword);
+console.log("City:", accuontCity);
+console.log("State:", accountState);
+
+// 📋 View all in table format
+console.table([accountId, accuontEmail, accountPassword, accuontCity, accountState]);
 
 /*
-prefer not to use var 
-var is function scoped
-let and const are block scoped
-const is used to declare a variable that cannot be reassigned
-
-what aree diference between let and var
-let is block scoped
-var is function scoped
+📌 Notes:
+- Prefer `let` and `const` over `var`
+- `var` is function scoped (can leak scope)
+- `let` and `const` are block scoped
+- `const` must be initialized & cannot be reassigned
 */
-
-console.table([accountId,accuontEmail,accountPassword,accuontCity,accountState]);
