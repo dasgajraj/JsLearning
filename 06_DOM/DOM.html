@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DOM Learning Notes</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section h2 {
+      color: #00ffcc;
+    }
+
+    ul, li {
+      margin: 5px 0;
+    }
+
+    .highlight {
+      background-color: green;
+      color: white;
+      padding: 8px;
+    }
+
+    .list-item {
+      background-color: #333;
+      padding: 5px 10px;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body class="bg-black">
+
+  <div class="text">
+    <h1 id="title" class="heading">DOM learning
+      <span style="display: none">test text</span>
+    </h1>
+    
+    <h2 id="sub-title" class="heading">Subheading Example</h2>
+    <p class="paragraph">Lorem ipsum dolor sit amet.</p>
+    <input type="text" class="password" placeholder="Type here..." />
+
+    <ul>
+      <li class="list-item">Item 1</li>
+      <li class="list-item">Item 2</li>
+      <li class="list-item">Item 3</li>
+      <li class="list-item">Item 4</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>📌 Text Access Methods</h2>
+    <ul>
+      <li><code>title.innerText</code> ➜ visible text only</li>
+      <li><code>title.textContent</code> ➜ full text including hidden</li>
+      <li><code>title.innerHTML</code> ➜ text + HTML content</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🎯 Selectors</h2>
+    <ul>
+      <li><code>document.querySelector('.heading')</code> ➜ First element with class `heading`</li>
+      <li><code>document.querySelector('#title')</code> ➜ Element with id `title`</li>
+      <li><code>document.querySelector('h1')</code> ➜ First &lt;h1&gt; element</li>
+      <li><code>document.querySelector('input[type="text"]')</code> ➜ Input of type text</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🎨 Style Manipulation</h2>
+    <ul>
+      <li><code>element.style.backgroundColor = 'green'</code></li>
+      <li><code>element.style.padding = '10px'</code></li>
+      <li><code>element.style.color = 'red'</code></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🔁 Looping Through Elements</h2>
+    <ul>
+      <li><code>document.querySelectorAll('li')</code> ➜ NodeList (can use forEach)</li>
+      <li><code>document.getElementsByClassName('list-item')</code> ➜ HTMLCollection (convert to array)</li>
+      <li><code>Array.from(collection).map(...)</code> ➜ Convert HTMLCollection to array</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🚀 Modifying Content</h2>
+    <ul>
+      <li><code>element.innerText = "Changed Text"</code></li>
+      <li><code>element.innerHTML = "&lt;strong&gt;Bold&lt;/strong&gt;"</code></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🛠️ Useful DOM Methods</h2>
+    <ul>
+      <li><code>document.getElementById()</code></li>
+      <li><code>document.getElementsByClassName()</code></li>
+      <li><code>document.getElementsByTagName()</code></li>
+      <li><code>document.querySelector()</code></li>
+      <li><code>document.querySelectorAll()</code></li>
+      <li><code>element.setAttribute('attr', 'value')</code></li>
+      <li><code>element.getAttribute('attr')</code></li>
+      <li><code>element.classList.add('className')</code></li>
+      <li><code>element.classList.remove('className')</code></li>
+      <li><code>element.classList.toggle('className')</code></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>📦 Events (Preview)</h2>
+    <ul>
+      <li><code>element.addEventListener('click', function)</code></li>
+      <li><code>element.addEventListener('mouseenter', function)</code></li>
+    </ul>
+    <p>👉 You’ll explore this in next steps with full examples.</p>
+  </div>
+
+  <script>
+    // ✅ DOM manipulation example
+    const title = document.querySelector('#title');
+    console.log("innerText:", title.innerText);
+    console.log("textContent:", title.textContent);
+    console.log("innerHTML:", title.innerHTML);
+
+    const turnGreen = document.querySelector('li');
+    turnGreen.style.backgroundColor = 'green';
+    turnGreen.style.padding = '10px';
+    turnGreen.innerText = "✅ Changed via JS";
+
+    // NodeList loop with querySelectorAll
+    const tempLiList = document.querySelectorAll('li');
+    tempLiList.forEach((val) => {
+    //   val.innerText = "🎉 Updated";
+    //   val.style.color = "red";
+    });
+
+    // HTMLCollection via getElementsByClassName
+    const temp = document.getElementsByClassName('list-item');
+    const converted = Array.from(temp);
+    converted.map((item) => {
+      item.style.backgroundColor = 'blue';
+      item.style.color = 'white';
+    });
+  </script>
+</body>
+</html>
