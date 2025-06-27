@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DOM 3 – Creating & Modifying Elements</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+    .box {
+      background-color: #333;
+      padding: 10px;
+      margin: 10px 0;
+      border-left: 4px solid #00ffcc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    button {
+      padding: 8px 14px;
+      margin-right: 10px;
+      background-color: #00ffcc;
+      border: none;
+      cursor: pointer;
+    }
+    #controls {
+      margin-top: 20px;
+    }
+    .delete-btn {
+      background-color: red;
+      color: white;
+      padding: 4px 8px;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+    }
+    #form-section {
+      margin-top: 30px;
+      background: #222;
+      padding: 20px;
+      border: 1px solid #00ffcc;
+    }
+    #form-section input {
+      padding: 6px;
+      margin-right: 10px;
+    }
+    #clone-button {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📦 DOM 3 – Creating, Editing, and Deleting Elements</h1>
+
+  <div id="container">
+    <div class="box">Item 1</div>
+    <div class="box">Item 2</div>
+    <div class="box">Item 3</div>
+  </div>
+
+  <div id="controls">
+    <button id="add">➕ Add Item</button>
+    <button id="remove">🗑️ Remove Last</button>
+    <button id="clone-button">📋 Clone First Box</button>
+    <button id="toggle-visibility">👀 Toggle Container</button>
+  </div>
+
+  <div id="form-section">
+    <h2>✏️ Dynamic Input Creation</h2>
+    <button id="create-input">Create Input</button>
+    <button id="submit-name">Submit</button>
+    <p id="name-output"></p>
+  </div>
+
+  <script>
+    const container = document.getElementById("container");
+
+    // ✅ Append new box
+    document.getElementById("add").addEventListener("click", () => {
+      const newDiv = document.createElement("div");
+      newDiv.className = "box";
+      newDiv.innerText = "🆕 New Item";
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.innerText = "Delete";
+      deleteBtn.className = "delete-btn";
+      deleteBtn.onclick = () => newDiv.remove();
+
+      newDiv.appendChild(deleteBtn);
+      container.appendChild(newDiv);
+    });
+
+    // ✅ Remove last box
+    document.getElementById("remove").addEventListener("click", () => {
+      const boxes = container.querySelectorAll(".box");
+      if (boxes.length > 0) {
+        container.removeChild(boxes[boxes.length - 1]);
+      }
+    });
+
+    // ✅ Insert at top
+    const firstBox = container.querySelector(".box");
+    const insertedDiv = document.createElement("div");
+    insertedDiv.className = "box";
+    insertedDiv.innerText = "📍 Inserted at Top";
+    container.insertBefore(insertedDiv, firstBox);
+
+    // ✅ Replace second box
+    const replaceBox = document.createElement("div");
+    replaceBox.className = "box";
+    replaceBox.innerText = "🔁 Replaced Item";
+    container.replaceChild(replaceBox, container.children[1]);
+
+    // ✅ Clone first box
+    document.getElementById("clone-button").addEventListener("click", () => {
+      const first = container.querySelector(".box");
+      const clone = first.cloneNode(true); // true = deep clone (with children)
+      container.appendChild(clone);
+    });
+
+    // ✅ Toggle visibility of container
+    document.getElementById("toggle-visibility").addEventListener("click", () => {
+      container.style.display = container.style.display === "none" ? "block" : "none";
+    });
+
+    // ✅ Create input field dynamically
+    document.getElementById("create-input").addEventListener("click", () => {
+      if (!document.getElementById("name-input")) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = "name-input";
+        input.placeholder = "Enter your name";
+        document.getElementById("form-section").insertBefore(input, document.getElementById("submit-name"));
+      }
+    });
+
+    // ✅ Read value from dynamic input
+    document.getElementById("submit-name").addEventListener("click", () => {
+      const input = document.getElementById("name-input");
+      if (input) {
+        document.getElementById("name-output").innerText = `👋 Hello, ${input.value || "Anonymous"}!`;
+      }
+    });
+
+    // ✅ DOM Traversing (dev tools or console)
+    console.log("All .box children:", container.children);
+    console.log("First element child:", container.firstElementChild);
+    console.log("Last element child:", container.lastElementChild);
+    console.log("Parent node of container:", container.parentNode);
+    console.log("Next sibling of first box:", container.firstElementChild.nextElementSibling);
+  </script>
+
+</body>
+</html>
