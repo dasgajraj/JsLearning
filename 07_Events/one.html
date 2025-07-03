@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Events – DOM</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #111;
+        color: white;
+        padding: 2rem;
+      }
+      img {
+        border: 3px solid white;
+        margin: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🖼️ Our Featured Gallery (Click Images)</h2>
+
+    <div id="images">
+      <ul>
+        <li>
+          <a href="https://unsplash.com" target="_blank">
+            <img
+              id="img1"
+              width="100px"
+              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600"
+              alt="Beautiful Landscape"
+            />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img
+              id="img2"
+              width="100px"
+              src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600"
+              alt="City Skyline"
+            />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img
+              id="img3"
+              width="100px"
+              src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600"
+              alt="Mountain View"
+            />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img
+              id="img4"
+              width="100px"
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600"
+              alt="Ocean Sunset"
+            />
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <h3>🧠 Keyboard Event Example</h3>
+    <input type="text" id="inputField" placeholder="Type here..." />
+
+    <script>
+      // ✅ Basic click event
+      document.getElementById("img1").addEventListener("click", function () {
+        alert("Clicked Image 1!");
+      });
+
+      // ✅ Access event object
+      document.getElementById("img2").addEventListener("click", function (e) {
+        console.log("Image 2 clicked");
+        console.log("Event Type:", e.type);
+        console.log("Target:", e.target);
+        console.log("Timestamp:", e.timeStamp);
+        e.preventDefault(); // prevents default <a> behavior
+      });
+
+      // ✅ Event Bubbling (default: false) — bottom ➜ up
+      document.getElementById("img3").addEventListener("click", function (e) {
+        console.log("🔥 Clicked img3");
+      }, false);
+
+      document.getElementById("images").addEventListener("click", function (e) {
+        console.log("🧱 Bubbling: Clicked inside #images");
+      }, false);
+
+      // ✅ Event Capturing (true) — top ➜ down
+      document.getElementById("img4").addEventListener("click", function (e) {
+        console.log("🎯 Capturing img4");
+      }, true);
+
+      document.getElementById("images").addEventListener("click", function (e) {
+        console.log("🪤 Capturing: Clicked container (true)");
+      }, true);
+
+      // ✅ Event Delegation (Best Practice)
+      document.getElementById("images").addEventListener("click", function (e) {
+        if (e.target.tagName === "IMG") {
+          console.log("🧼 Delegated Handler:", e.target.id, "clicked");
+        }
+      });
+
+      // ✅ Prevent redirect on img1 <a> click
+      document.querySelector("a[href*='unsplash']").addEventListener("click", function (e) {
+        e.preventDefault(); // block anchor tag
+        alert("Link click prevented via e.preventDefault()");
+      });
+
+      // ✅ Keyboard Events
+      document.getElementById("inputField").addEventListener("keydown", function (e) {
+        console.log(`🧠 Keydown: ${e.key} (code: ${e.keyCode})`);
+        if (e.key === "Enter") {
+          alert("🚀 You pressed Enter!");
+        }
+      });
+
+      // ✅ Hover Event (mouseenter + mouseleave)
+      const img1 = document.getElementById("img1");
+      img1.addEventListener("mouseenter", () => {
+        img1.style.borderColor = "lime";
+      });
+      img1.addEventListener("mouseleave", () => {
+        img1.style.borderColor = "white";
+      });
+
+      // ✅ Stop Propagation Example
+      document.getElementById("img3").addEventListener("click", function (e) {
+        e.stopPropagation();
+        console.log("Stopped bubbling from img3");
+      });
+
+    </script>
+  </body>
+</html>
