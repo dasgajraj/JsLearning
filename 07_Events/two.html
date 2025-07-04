@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Async JS Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #00ffcc;
+      font-size: 2rem;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 1rem;
+      background-color: crimson;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 id="heading">Async JS Project</h1>
+  <button id="b1">⏹️ Stop</button>
+
+  <script>
+    // ✅ Function to change the heading text
+    const changeText = function () {
+      document.getElementById("heading").innerText = "🚀 Das Gajraj Project";
+    };
+
+    // ✅ Set a timeout for 2 seconds
+    const changeMe = setTimeout(changeText, 2000); // NOTE: not calling, just passing the reference
+
+    // ✅ Button click to clear timeout
+    document.getElementById("b1").addEventListener("click", function () {
+      clearTimeout(changeMe); // stops the text from changing
+      console.log("🛑 Timeout Cleared!");
+
+      // Optional: Restore original text (if already changed)
+      document.getElementById("heading").innerText = "⏹️ Async JS Stopped";
+    });
+
+    // ✅ Example: show how setTimeout can run delayed function
+    setTimeout(() => {
+      console.log("✅ Hello from setTimeout after 2s");
+    }, 2000);
+  </script>
+</body>
+</html>
